@@ -1,0 +1,2114 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/1/2016 10:40:22 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="335DPC868"
+  DTS:CreatorName="OWS\tsyed"
+  DTS:DTSID="{8F91A5F2-E581-4ABE-9AAD-D3C15D75E066}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LCGMS_RPT_GRADES_FINAL_Report_in_DOE1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{5DD783CB-DD8B-45F8-9243-A28C74D24BA9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ES11VdSINFSQL01.LCGMS.lcgmsappuser]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2F5C22F2-32DB-4976-B449-F50D5692AFAF}"
+      DTS:ObjectName="ES11VdSINFSQL01.LCGMS.lcgmsappuser">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::ES11VdSINFSQL01LCGMSLcgmsappuser_ConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ES11VdSINFSQL01;User ID=lcgmsappuser;Initial Catalog=LCGMS;Provider=SQLNCLI11;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOEL2pU9uLEK9DaK/PHIjFgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACe10XJC+QOWRhIrEOV4R+2AAAAAASAAACgAAAAEAAAAMrn9oQZubXNQU5vrvkWxpoQAAAAY1rMAbK59ZwosmmwUdSnqhQAAACrzx45+px8MyIQFFA42AXW5ojZlA</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{223EF74E-22EF-4764-953B-60FF79B37D34}"
+      DTS:ObjectName="LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PROJ_SMTPConnectionManager_ConnectionString]"
+      DTS:CreationName="SMTP"
+      DTS:Description="PROJ_SMTPConnectionManager_ConnectionString"
+      DTS:DTSID="{6844C046-28CF-4862-B150-AE9D356EBD30}"
+      DTS:ObjectName="PROJ_SMTPConnectionManager_ConnectionString">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::PROJ_SMTPConnectionManager_ConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=NYCBOEMAILSERVER1;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{67646126-715A-4940-B519-481C6A9F878D}"
+      DTS:ObjectName="ES11VdSINFSQL01LCGMSLcgmsappuser_ConnectionString">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Data Source=ES11VdSINFSQL01;User ID=lcgmsappuser;Password=welcome;Initial Catalog=LCGMS;Provider=SQLNCLI11;Persist Security Info=True;Auto Translate=False;</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{FA181A7D-F582-438D-B0E0-8744EA3D3772}"
+      DTS:ObjectName="FinalStepSendEmailTaskGradeFinalIssueReport_CCLine">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">tsyed@schools.nyc.gov</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{227462D3-416D-4F75-A156-7C5BCCACFEE6}"
+      DTS:ObjectName="FinalStepSendEmailTaskGradeFinalIssueReport_Subject">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">LCGMS Grades Final Data Issue Report: 6/7/2013</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{505AC483-48B8-4BCB-827D-D69E51C78C2C}"
+      DTS:ObjectName="FinalStepSendEmailTaskGradeFinalIssueReport_ToLine">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">tsyed@schools.nyc.gov</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{2018CDCA-A25D-4B34-ACD2-0C964858C77A}"
+      DTS:ObjectName="LCGMS_RPT_GRADES_FINAL_Report_in_DOE_DestinationFile">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE.xls</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{60DE67C1-3527-4266-BE15-3809E5B47DBB}"
+      DTS:ObjectName="LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE.xls;Extended Properties="EXCEL 8.0;HDR=YES";</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5FD0A346-BD6A-476E-B89D-F1A465BE0C6B}"
+      DTS:ObjectName="LCGMS_RPT_GRADES_FINAL_Report_in_DOE_SourceFile">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE_Template.xls</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{21D11139-FD08-4737-AD8B-15072D1183C9}"
+      DTS:ObjectName="PROJ_SMTPConnectionManager_ConnectionString">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">SmtpServer=NYCBOEMAILSERVER1;UseWindowsAuthentication=False;EnableSsl=False;</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{CC0C737B-B45F-492E-9A9F-0EB88BB97BAF}"
+      DTS:ObjectName="SqlDatabasePW">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">welcome</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{FA4CCE9B-AED3-4AB0-9C43-57A3D25C78F9}"
+      DTS:ObjectName="SqlDatabaseServer">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">ES11VdSINFSQL01</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{265A9C16-7068-44AD-8D1E-21B37637BCD8}"
+      DTS:ObjectName="SqlDatabaseUID">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">lcgmsappuser</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{43BD408A-D21B-4377-A5E3-3000E4C6C911}"
+      DTS:ObjectName="Step05SendEmailTaskNoIssuesInGradeFinalData_ToLine">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">tsyed@schools.nyc.gov</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D481C421-1F8D-4B0E-812B-65EDCE62ACE3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::LCGMS_RPT_GRADES_FINAL_Report_in_DOE_DestinationFile]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE.xls</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4FEF4483-A4BA-412C-8900-C4F02E1AB53E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::ES11VdSINFSQL01LCGMSLcgmsappuser_ConnectionString]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ES11VdSINFSQL01LCGMSLcgmsappuser_ConnectionString">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=ES11VdSINFSQL01;User ID=lcgmsappuser;Password=welcome;Initial Catalog=LCGMS;Provider=SQLNCLI11;Persist Security Info=True;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{734F9169-6AFE-4486-B56D-E88CDB9BFC27}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::FinalStepSendEmailTaskGradeFinalIssueReport_CCLine]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FinalStepSendEmailTaskGradeFinalIssueReport_CCLine">
+      <DTS:VariableValue
+        DTS:DataType="8">tsyed@schools.nyc.gov</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DC99F63E-8CA9-46E1-8F1D-231B3AA27C1C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::FinalStepSendEmailTaskGradeFinalIssueReport_ToLine]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FinalStepSendEmailTaskGradeFinalIssueReport_ToLine">
+      <DTS:VariableValue
+        DTS:DataType="8">tsyed@schools.nyc.gov</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F09AB6AA-2CEB-446A-AA70-E7E1755A26B2}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager">
+      <DTS:VariableValue
+        DTS:DataType="8">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE.xls;Extended Properties="EXCEL 8.0;HDR=YES";</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1ED44414-8FB9-4164-BE5A-02E17D47F4D2}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::PROJ_SMTPConnectionManager_ConnectionString]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PROJ_SMTPConnectionManager_ConnectionString">
+      <DTS:VariableValue
+        DTS:DataType="8">SmtpServer=NYCBOEMAILSERVER1;UseWindowsAuthentication=False;EnableSsl=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{63B68864-580C-4AE5-AE43-409A262F77D9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::LCGMS_RPT_GRADES_FINAL_Report_in_DOE_SourceFile]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE_Template.xls</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{012D478C-9ED1-4700-8B3A-7DF333C395BB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::SqlDatabasePW]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SqlDatabasePW">
+      <DTS:VariableValue
+        DTS:DataType="8">welcome</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E3747DFB-7DC4-4BAD-9B8B-505474ABDD79}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::SqlDatabaseServer]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SqlDatabaseServer">
+      <DTS:VariableValue
+        DTS:DataType="8">ES11VdSINFSQL01</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{85D1B660-1B82-4B6A-88A7-447386F08270}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::SqlDatabaseUID]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SqlDatabaseUID">
+      <DTS:VariableValue
+        DTS:DataType="8">lcgmsappuser</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A92C1CBE-C43C-4406-8AB7-2C318639859A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::Step05SendEmailTaskNoIssuesInGradeFinalData_ToLine]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Step05SendEmailTaskNoIssuesInGradeFinalData_ToLine">
+      <DTS:VariableValue
+        DTS:DataType="8">tsyed@schools.nyc.gov</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FC48C636-3152-4DBB-9942-620C25C78EEA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Today">
+      <DTS:VariableValue
+        DTS:DataType="7">9/1/2016 10:51:26 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B822EC29-1049-4232-B7DE-F28DCB661C79}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TotalRows">
+      <DTS:VariableValue
+        DTS:DataType="19">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Final Step Send Email task - Grade Final Issue Report"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Final Step Send Email task - Grade Final Issue Report"
+      DTS:DTSID="{7a77161b-efe5-41d1-8129-397fb3b4cb14}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Final Step Send Email task - Grade Final Issue Report"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="CCLine">@[$Package::FinalStepSendEmailTaskGradeFinalIssueReport_CCLine]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="FileAttachments">@[$Package::LCGMS_RPT_GRADES_FINAL_Report_in_DOE_DestinationFile]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"LCGMS Grades Final Data Issue Report (Server: " + @[$Package::SqlDatabaseServer] + ") as of " +  (DT_WSTR,30)(@[User::Today])</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ToLine">@[$Package::FinalStepSendEmailTaskGradeFinalIssueReport_ToLine]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{6844C046-28CF-4862-B150-AE9D356EBD30}"
+          SendMailTask:From="LCGMS_Grades_Final_Data_Issue_Report@schools.nyc.gov"
+          SendMailTask:To="tsyed@schools.nyc.gov"
+          SendMailTask:CC="tsyed@schools.nyc.gov"
+          SendMailTask:Subject="LCGMS Grades Final Data Issue Report (Server: ES11VdSINFSQL01) as of 9/1/2016 10:51:26 AM"
+          SendMailTask:MessageSource="&#xA;      Please review the attached Excel spreadsheet.&#xA;&#xA;      Tab 1:  Identifies All the Active DOE ATS Schools for the Current fiscal year whose Grades Final are blank or Null. The information is displayed in ATS sequence.&#xA;&#xA;      This spreadsheet is produced on a daily basis. You will receive this email notice each weekday morning throughout the school year ONLY if there are reported items for the day.&#xA;&#xA;      If there is nothing to report, you will not receive the report for the day.&#xA;&#xA;      If you have any questions or concerns, please contact the LCGMS team at OOD@schools.nyc.gov.&#xA;&#xA;      Thank you.&#xA;    " xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask">
+          <SendMailTask:Attachments
+            SendMailTask:FileName="\\ES11VDMDWSQL01\ETL_Scripts\BatchProcessing\LCGMS\FILES\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE\LCGMS_RPT_GRADES_FINAL_Issues_in_DOE.xls" />
+        </SendMailTask:SendMailTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ed3b06e3-b094-41f9-a192-3e8ff1c429e8}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 02 Data Flow Task - Get Grades Final Missing Data"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[DBN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="DBN"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[DBN]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[Location Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Location Code"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Code]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[Location Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Location Name"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Name]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[Location Category]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="35"
+                      cachedName="Location Category"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Category]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[Current Grades]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="45"
+                      cachedName="Current Grades"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Current Grades]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[Final Grades]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="45"
+                      cachedName="Final Grades"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Final Grades]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[Managed By Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="35"
+                      cachedName="Managed By Description"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed By Description]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input].Columns[Open Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Open Date"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Open Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DBN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DBN]"
+                      name="Copy of DBN"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[DBN]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Code]"
+                      name="Copy of Location Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Code]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Name]"
+                      name="Copy of Location Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Managed By Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Managed By Description]"
+                      name="Copy of Managed By Description"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed By Description]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Category]"
+                      name="Copy of Location Category"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Category]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Current Grades]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Current Grades]"
+                      name="Copy of Current Grades"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Current Grades]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Final Grades]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Final Grades]"
+                      name="Copy of Final Grades"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Final Grades]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Open Date]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Open Date]"
+                      name="Copy of Open Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Open Date]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'Grades Final$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager]"
+                  connectionManagerRefId="Package.ConnectionManagers[LCGMS_RPT_GRADES_FINAL_Report_in_DOE_ExcelConnectionManager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of DBN]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Copy of DBN"
+                      cachedSortKeyPosition="2"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[DBN]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of DBN]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Location Code]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Copy of Location Code"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Location Code]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Code]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Location Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Copy of Location Name"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Location Name]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Name]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Managed By Description]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="Copy of Managed By Description"
+                      cachedSortKeyPosition="-1"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Managed By Description]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Managed By Description]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Location Category]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="Copy of Location Category"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Location Category]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Category]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Current Grades]"
+                      cachedDataType="wstr"
+                      cachedLength="45"
+                      cachedName="Copy of Current Grades"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Current Grades]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Current Grades]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Final Grades]"
+                      cachedDataType="wstr"
+                      cachedLength="45"
+                      cachedName="Copy of Final Grades"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Final Grades]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Final Grades]" />
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Open Date]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Copy of Open Date"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Open Date]"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Open Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[DBN]"
+                      dataType="wstr"
+                      length="255"
+                      name="DBN" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Location Code]"
+                      dataType="wstr"
+                      length="255"
+                      name="Location Code" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Location Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Location Name" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Managed By Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Managed By Description" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Location Category]"
+                      dataType="wstr"
+                      length="255"
+                      name="Location Category" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Open Date]"
+                      dataType="wstr"
+                      length="255"
+                      name="Open Date" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Current Grades]"
+                      dataType="wstr"
+                      length="255"
+                      name="Current Grades" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Final Grades]"
+                      dataType="wstr"
+                      length="255"
+                      name="Final Grades" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[view_LCGMS_RPT_GRADES_FINAL_Issues_in_DOE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ES11VdSINFSQL01.LCGMS.lcgmsappuser]"
+                  connectionManagerRefId="Package.ConnectionManagers[ES11VdSINFSQL01.LCGMS.lcgmsappuser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[DBN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DBN]"
+                      length="12"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[DBN]"
+                      name="DBN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location Code]"
+                      length="4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Code]"
+                      name="Location Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location Name]"
+                      length="100"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Name]"
+                      name="Location Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Category]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location Category]"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Location Category]"
+                      name="Location Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Current Grades]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Current Grades]"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Current Grades]"
+                      name="Current Grades"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Final Grades]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Final Grades]"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Final Grades]"
+                      name="Final Grades"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed By Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed By Description]"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Managed By Description]"
+                      name="Managed By Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Open Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Open Date]"
+                      length="20"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Open Date]"
+                      name="Open Date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="DBN" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Location Code" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Location Name" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Location Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="Location Category" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Current Grades]"
+                      codePage="1252"
+                      dataType="str"
+                      length="45"
+                      name="Current Grades" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Final Grades]"
+                      codePage="1252"
+                      dataType="str"
+                      length="45"
+                      name="Final Grades" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Managed By Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="Managed By Description" />
+                    <externalMetadataColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Open Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Open Date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DBN]"
+                      name="DBN" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location Code]"
+                      name="Location Code" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location Name]"
+                      name="Location Name" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed By Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Managed By Description]"
+                      name="Managed By Description" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Location Category]"
+                      name="Location Category" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Open Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Open Date]"
+                      name="Open Date" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Current Grades]"
+                      codePage="1252"
+                      dataType="str"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Current Grades]"
+                      name="Current Grades" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Final Grades]"
+                      codePage="1252"
+                      dataType="str"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Final Grades]"
+                      name="Final Grades" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts data."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of DBN]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Copy of DBN"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DBN]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of Location Code]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Copy of Location Code"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Code]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of Location Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Copy of Location Name"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of Location Category]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="Copy of Location Category"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Category]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of Current Grades]"
+                      cachedDataType="wstr"
+                      cachedLength="45"
+                      cachedName="Copy of Current Grades"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Current Grades]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of Final Grades]"
+                      cachedDataType="wstr"
+                      cachedLength="45"
+                      cachedName="Copy of Final Grades"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Final Grades]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of Managed By Description]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="Copy of Managed By Description"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Managed By Description]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">-1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input].Columns[Copy of Open Date]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Copy of Open Date"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Open Date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of DBN]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of DBN]"
+                      name="Copy of DBN"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DBN]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Code]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Code]"
+                      name="Copy of Location Code">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Code]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Name]"
+                      name="Copy of Location Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Category]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Location Category]"
+                      name="Copy of Location Category">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Location Category]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Current Grades]"
+                      dataType="wstr"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Current Grades]"
+                      name="Copy of Current Grades">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Current Grades]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Final Grades]"
+                      dataType="wstr"
+                      length="45"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Final Grades]"
+                      name="Copy of Final Grades">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Final Grades]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Managed By Description]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Managed By Description]"
+                      name="Copy of Managed By Description"
+                      sortKeyPosition="-1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Managed By Description]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Open Date]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output].Columns[Copy of Open Date]"
+                      name="Copy of Open Date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Open Date]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data.Paths[Data Conversion Output]"
+              endId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Inputs[Sort Input]"
+              name="Data Conversion Output"
+              startId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data.Paths[OLE DB Source Output]"
+              endId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data.Paths[Sort Output]"
+              endId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination.Inputs[Excel Destination Input]"
+              name="Sort Output"
+              startId="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step01 File System Task - Copy Excel File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{ba1b5aa5-d3db-453a-96c0-bc50ef61c2a7}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step01 File System Task - Copy Excel File"
+      DTS:TaskContact="File System Task;Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::SourceFile"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::DestinationFile"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step01 File system task - Problem copy LCGMS_Grade_Final_Data_Issues_Template file"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Step01 File system task - Problem copy LCGMS_Grade_Final_Data_Issues_Template file"
+      DTS:DTSID="{43f88aa7-4d33-4eb4-9e92-4d044ed3b57e}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step01 File system task - Problem copy LCGMS_Grade_Final_Data_Issues_Template file"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"Step01 File system task - Problem copy LCGMS_Grade_Final_Data_Issues_Template file (Server: " + @[$Package::SqlDatabaseServer] + ")."</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{6844C046-28CF-4862-B150-AE9D356EBD30}"
+          SendMailTask:From="LCGMS_Grades_Final_Data_Issue_Report1@schools.nyc.gov"
+          SendMailTask:To="tsyed@schools.nyc.gov"
+          SendMailTask:Subject="Step01 File system task - Problem copy LCGMS_Grade_Final_Data_Issues_Template file (Server: ES11VdSINFSQL01)." xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step02 Data File Task - Problem Getting Grade Final Missing Data"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Step02 Data File Task - Problem Getting Grade Final Missing Data"
+      DTS:DTSID="{4123e6d4-896a-41b8-8693-ccde91fa3fb4}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step02 Data File Task - Problem Getting Grade Final Missing Data"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"Step02 Data File Task - Problem Getting Grade Final Missing Data (Server: " + @[$Package::SqlDatabaseServer] + ")."</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{6844C046-28CF-4862-B150-AE9D356EBD30}"
+          SendMailTask:From="LCGMS_Grades_Final_Data_Issue_Report1@schools.nyc.gov"
+          SendMailTask:To="tsyed@schools.nyc.gov"
+          SendMailTask:Subject="Step02 Data File Task - Problem Getting Grade Final Missing Data (Server: ES11VdSINFSQL01)." xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step03 Execute SQL Task - Get Current Date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Step03 Execute SQL Task - Get Current Date"
+      DTS:DTSID="{9a18044d-531f-4c38-b2da-668726455d38}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step03 Execute SQL Task - Get Current Date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2F5C22F2-32DB-4976-B449-F50D5692AFAF}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="SELECT getdate() AS [User::Today]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::Today" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step03 Execute SQL task - Problem Getting Current Date"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Step03 Execute SQL task - Problem Getting Current Date"
+      DTS:DTSID="{223f9425-c9e2-4e78-859e-981cf732d06d}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step03 Execute SQL task - Problem Getting Current Date"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"Step03 Execute SQL task - Problem Getting Current Date (Server: " + @[$Package::SqlDatabaseServer] + ")."</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{6844C046-28CF-4862-B150-AE9D356EBD30}"
+          SendMailTask:From="LCGMS_Grades_Final_Data_Issue_Report1@schools.nyc.gov"
+          SendMailTask:To="tsyed@schools.nyc.gov"
+          SendMailTask:Subject="Step03 Execute SQL task - Problem Getting Current Date (Server: ES11VdSINFSQL01)." xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step04 Execute SQL Task - Get Total Rows"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{876254bc-481c-4cfa-baa2-6ceebfdc2f37}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step04 Execute SQL Task - Get Total Rows"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2F5C22F2-32DB-4976-B449-F50D5692AFAF}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="SELECT LCGMS.dbo.fn_GetRowCount_GRADES_FINAL() AS [User::TotalRows]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::TotalRows" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step04 Execute SQL task - Problem Getting Total Rows"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Step04 Execute SQL task - Problem Getting Total Rows"
+      DTS:DTSID="{42c5267a-a555-4f7f-9204-2c06e72673b0}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step04 Execute SQL task - Problem Getting Total Rows"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"Step04 Execute SQL task - Problem Getting Total Rows (Server: " + @[$Package::SqlDatabaseServer] + ")."</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{6844C046-28CF-4862-B150-AE9D356EBD30}"
+          SendMailTask:From="LCGMS_Grades_Final_Data_Issue_Report1@schools.nyc.gov"
+          SendMailTask:To="tsyed@schools.nyc.gov"
+          SendMailTask:Subject="Step04 Execute SQL task - Problem Getting Total Rows (Server: ES11VdSINFSQL01)." xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step05 Send Email task - No Issues in Grade Final Data"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Step05 Send Email task - No Issues in Grade Final Data"
+      DTS:DisableEventHandlers="True"
+      DTS:DTSID="{3c37aa8d-2e10-4170-bce3-fbbd12072d82}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step05 Send Email task - No Issues in Grade Final Data"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="CCLine">@[$Package::FinalStepSendEmailTaskGradeFinalIssueReport_CCLine]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Subject">"LCGMS Grades Final Data Issue Report (No Data Issue) from Server (" + @[$Package::SqlDatabaseServer] + ") as of " +  (DT_WSTR,30)(@[User::Today])</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ToLine">@[$Package::FinalStepSendEmailTaskGradeFinalIssueReport_ToLine]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{6844C046-28CF-4862-B150-AE9D356EBD30}"
+          SendMailTask:From="LCGMS_Grades_Final_Data_Issue_Report@schools.nyc.gov"
+          SendMailTask:To="tsyed@schools.nyc.gov"
+          SendMailTask:CC="tsyed@schools.nyc.gov"
+          SendMailTask:Subject="LCGMS Grades Final Data Issue Report (No Data Issue) from Server (ES11VdSINFSQL01) as of 9/1/2016 10:51:26 AM"
+          SendMailTask:MessageSource="&#xA;      *** Details of the Grade Final Data Issues Report thru LCGMS Database Specification ***&#xA;&#xA;&#xA;      The Extract criteria: All the Active DOE ATS Schools for the Current Fiscal Year with the missing Final Grades.&#xA;&#xA;&#xA;      Report Name/File: LCGMS_RPT_GRADES_FINAL_Issues_in_DOE.xls&#xA;&#xA;&#xA;      The reports composed of ONE sheet is as follow: Grades Final&#xA;&#xA;&#xA;      This SSIS package [LCGMS_RPT_GRADES_FINAL_Issues_in_DOE] is scheduled to generate reports on a daily basis;&#xA;&#xA;&#xA;      It provides missing Grades Final information with the same schema as follow:&#xA;&#xA;      1. DBN&#xA;      2. Location Code&#xA;      3. Location Name&#xA;      4. Location Category&#xA;      5. Current Grades&#xA;      6. Final Grades&#xA;&#xA;&#xA;      If you have any concern or question, please contact LCGMS team.&#xA;&#xA;&#xA;      Please don't reply back on OOD@schools.nyc.gov email address.&#xA;&#xA;&#xA;      Thanks&#xA;&#xA;    " xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EFAD7DC1-BC64-4E1E-8C3D-E4A5DC775924}"
+      DTS:From="Package\Step01 File System Task - Copy Excel File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Step 02 Data Flow Task - Get Grades Final Missing Data" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0496D98D-62B6-491F-8079-26B0AEF072C6}"
+      DTS:From="Package\Step 02 Data Flow Task - Get Grades Final Missing Data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Step03 Execute SQL Task - Get Current Date" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{C2818797-EEC7-46A2-A2A4-E2FAC2C5A5D8}"
+      DTS:From="Package\Step03 Execute SQL Task - Get Current Date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Step04 Execute SQL Task - Get Total Rows" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{ff6d5ae6-a994-48fd-bed3-23961a573ffa}"
+      DTS:From="Package\Step01 File System Task - Copy Excel File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Step01 File system task - Problem copy LCGMS_Grade_Final_Data_Issues_Template file"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{0db66829-0369-45ba-89cf-89b0685aec5c}"
+      DTS:From="Package\Step 02 Data Flow Task - Get Grades Final Missing Data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Step02 Data File Task - Problem Getting Grade Final Missing Data"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{b1b962af-2f62-4035-af3b-7f8903154c4d}"
+      DTS:From="Package\Step03 Execute SQL Task - Get Current Date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Step03 Execute SQL task - Problem Getting Current Date"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{df732fd3-ecfa-4783-9dfe-7d421e7ffdd0}"
+      DTS:From="Package\Step04 Execute SQL Task - Get Total Rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Step04 Execute SQL task - Problem Getting Total Rows"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{C4311074-855C-44EF-8591-66E253990E07}"
+      DTS:EvalOp="3"
+      DTS:Expression="@TotalRows == 0"
+      DTS:From="Package\Step04 Execute SQL Task - Get Total Rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Step05 Send Email task - No Issues in Grade Final Data" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{C122C11A-9128-4597-A5C6-6A34D3DDCBFE}"
+      DTS:EvalOp="3"
+      DTS:Expression="@TotalRows &gt; 0"
+      DTS:From="Package\Step04 Execute SQL Task - Get Total Rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Final Step Send Email task - Grade Final Issue Report" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="342,44"
+          Id="Package\Final Step Send Email task - Grade Final Issue Report"
+          TopLeft="475.320754716981,400" />
+        <NodeLayout
+          Size="344,44"
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data"
+          TopLeft="40,118" />
+        <NodeLayout
+          Size="344,44"
+          Id="Package\Step01 File System Task - Copy Excel File"
+          TopLeft="40,28" />
+        <NodeLayout
+          Size="342,44"
+          Id="Package\Step01 File system task - Problem copy LCGMS_Grade_Final_Data_Issues_Template file"
+          TopLeft="475.320754716981,28" />
+        <NodeLayout
+          Size="342,44"
+          Id="Package\Step02 Data File Task - Problem Getting Grade Final Missing Data"
+          TopLeft="475.320754716981,121" />
+        <NodeLayout
+          Size="344,44"
+          Id="Package\Step03 Execute SQL Task - Get Current Date"
+          TopLeft="40,204" />
+        <NodeLayout
+          Size="342,44"
+          Id="Package\Step03 Execute SQL task - Problem Getting Current Date"
+          TopLeft="475.320754716981,204" />
+        <NodeLayout
+          Size="344,44"
+          Id="Package\Step04 Execute SQL Task - Get Total Rows"
+          TopLeft="40,284" />
+        <NodeLayout
+          Size="342,44"
+          Id="Package\Step04 Execute SQL task - Problem Getting Total Rows"
+          TopLeft="475.320754716981,284" />
+        <NodeLayout
+          Size="344,44"
+          Id="Package\Step05 Send Email task - No Issues in Grade Final Data"
+          TopLeft="40,400" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="212,72">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="212,162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="212,248">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="384,50">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.320754716981,0"
+              Start="0,0"
+              End="83.820754716981,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="83.820754716981,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.6690297022405,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="384,141.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.320754716981,0"
+              Start="0,0"
+              End="83.820754716981,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="83.820754716981,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.6690297022405,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="384,226">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.320754716981,0"
+              Start="0,0"
+              End="83.820754716981,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="83.820754716981,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.6690297022405,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="384,306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.320754716981,0"
+              Start="0,0"
+              End="83.820754716981,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="83.820754716981,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.6690297022405,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="156,328">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56,72"
+              Start="0,0"
+              End="56,64.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
+                  <mssgle:LineSegment
+                    End="52,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="52,29"
+                    Point2="56,29"
+                    Point3="56,33" />
+                  <mssgle:LineSegment
+                    End="56,64.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="20,34,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="268,328">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="378.320754716981,72"
+              Start="0,0"
+              End="378.320754716981,64.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
+                  <mssgle:LineSegment
+                    End="374.320754716981,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="374.320754716981,29"
+                    Point2="378.320754716981,29"
+                    Point3="378.320754716981,33" />
+                  <mssgle:LineSegment
+                    End="378.320754716981,64.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="181.160377358491,34,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Step 02 Data Flow Task - Get Grades Final Missing Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination"
+          TopLeft="5.5,330.481132075472" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Sort"
+          TopLeft="5.5,222.103773584906" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Data Conversion"
+          TopLeft="5.5,113.801886792453" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source"
+          TopLeft="5.5,6.5" />
+        <EdgeLayout
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data.Paths[Sort Output]"
+          TopLeft="136.292452830189,266.028301886792">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.4528301886792"
+              Start="0,0"
+              End="0,56.9528301886792">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.9528301886792" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data.Paths[OLE DB Source Output]"
+          TopLeft="136.5,50.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.301886792453"
+              Start="0,0"
+              End="0,55.801886792453">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.801886792453" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Step 02 Data Flow Task - Get Grades Final Missing Data.Paths[Data Conversion Output]"
+          TopLeft="136.292452830189,157.72641509434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.377358490566"
+              Start="0,0"
+              End="0,56.877358490566">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.877358490566" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Step 02 Data Flow Task - Get Grades Final Missing Data\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
